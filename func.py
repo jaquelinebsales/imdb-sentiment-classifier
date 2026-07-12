@@ -1,0 +1,1 @@
+# Funções auxiliares (ex: processar texto)
