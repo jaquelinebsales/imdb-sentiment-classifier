@@ -13,8 +13,6 @@ A Machine Learning web app to classify movie reviews as **positive** or **negati
 
 Este projeto utiliza o [IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews).
 
-⚠️ **O dataset não está incluído no repositório.** Para executar o projeto, baixe o arquivo `IMDB_Dataset.csv` do Kaggle e coloque-o na raiz do projeto.
-
 ---
 
 ## ⚙️ Como Executar
