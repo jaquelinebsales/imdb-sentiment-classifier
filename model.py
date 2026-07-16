@@ -1,13 +1,14 @@
-import pandas as pd
-import joblib
-import nltk
-import re
-import os
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from nltk.corpus import stopwords
+import pandas as pd
+import joblib
+import nltk
+import json
+import re
+import os
 
 nltk.download('stopwords')
 
@@ -55,9 +56,76 @@ modelo = LogisticRegression(
 modelo.fit(X_train_vec, y_train)
 
 y_pred = modelo.predict(X_test_vec)
+
+print("="*50)
+print("📊 AVALIAÇÃO DO MODELO")
+print("="*50)
+
 print(f"Acurácia: {accuracy_score(y_test, y_pred):.4f}")
+print("\nRelatório de Classificação:")
 print(classification_report(y_test, y_pred))
+print("\nMatriz de Confusão:")
 print(confusion_matrix(y_test, y_pred))
+
+print("\n" + "="*50)
+print("🔍 PALAVRAS MAIS IMPORTANTES")
+print("="*50)
+
+coeficientes = modelo.coef_[0]
+palavras = vetorizador.get_feature_names_out()
+
+top_pos = sorted(zip(coeficientes, palavras), reverse=True)[:10]
+print("\n🔝 Palavras mais associadas a POSITIVO:")
+for i, (coef, palavra) in enumerate(top_pos, 1):
+    print(f"  {i:2d}. '{palavra}': {coef:.4f}")
+
+top_neg = sorted(zip(coeficientes, palavras))[:10]
+print("\n🔝 Palavras mais associadas a NEGATIVO:")
+for i, (coef, palavra) in enumerate(top_neg, 1):
+    print(f"  {i:2d}. '{palavra}': {coef:.4f}")
+
+metricas = {
+    'acuracia': float(accuracy_score(y_test, y_pred)),
+    'matriz_confusao': confusion_matrix(y_test, y_pred).tolist(),
+    'relatorio': {
+        'negativo': {
+            'precisao': float(precision_score(y_test, y_pred, pos_label='negative')),
+            'recall': float(recall_score(y_test, y_pred, pos_label='negative')),
+            'f1': float(f1_score(y_test, y_pred, pos_label='negative')),
+            'suporte': int((y_test == 'negative').sum())
+        },
+        'positivo': {
+            'precisao': float(precision_score(y_test, y_pred, pos_label='positive')),
+            'recall': float(recall_score(y_test, y_pred, pos_label='positive')),
+            'f1': float(f1_score(y_test, y_pred, pos_label='positive')),
+            'suporte': int((y_test == 'positive').sum())
+        }
+    },
+    'classes': modelo.classes_.tolist(),
+    'params': {
+        'modelo': 'LogisticRegression',
+        'max_features': 12500,
+        'ngram_range': [1, 2],
+        'stop_words': 'custom (sem negações)',
+        'C': 1.0,
+        'max_iter': 1000,
+        'solver': 'lbfgs'
+    },
+    'palavras_importantes': {
+        'positivas': [{'palavra': p, 'coeficiente': float(c)} for c, p in top_pos],
+        'negativas': [{'palavra': p, 'coeficiente': float(c)} for c, p in top_neg]
+    }
+}
+
+with open('models/metricas.json', 'w') as f:
+    json.dump(metricas, f, indent=4)
+
+print("\n✅ Métricas salvas em 'models/metricas.json'")
 
 joblib.dump(modelo, 'models/sentiment_model.pkl')
 joblib.dump(vetorizador, 'models/vectorizer.pkl')
+
+print("\n✅ Modelo e vetorizador salvos em 'models/'")
+print("="*50)
+print("🏁 TREINAMENTO CONCLUÍDO!")
+print("="*50)

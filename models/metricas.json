@@ -1,0 +1,129 @@
+{
+    "acuracia": 0.8974,
+    "matriz_confusao": [
+        [
+            4438,
+            562
+        ],
+        [
+            464,
+            4536
+        ]
+    ],
+    "relatorio": {
+        "negativo": {
+            "precisao": 0.9053447572419421,
+            "recall": 0.8876,
+            "f1": 0.8963845687739851,
+            "suporte": 5000
+        },
+        "positivo": {
+            "precisao": 0.8897606904668497,
+            "recall": 0.9072,
+            "f1": 0.8983957219251337,
+            "suporte": 5000
+        }
+    },
+    "classes": [
+        "negative",
+        "positive"
+    ],
+    "params": {
+        "modelo": "LogisticRegression",
+        "max_features": 12500,
+        "ngram_range": [
+            1,
+            2
+        ],
+        "stop_words": "custom (sem nega\u00e7\u00f5es)",
+        "C": 1.0,
+        "max_iter": 1000,
+        "solver": "lbfgs"
+    },
+    "palavras_importantes": {
+        "positivas": [
+            {
+                "palavra": "great",
+                "coeficiente": 7.304715819112439
+            },
+            {
+                "palavra": "excellent",
+                "coeficiente": 6.492096882709527
+            },
+            {
+                "palavra": "perfect",
+                "coeficiente": 5.402860459549028
+            },
+            {
+                "palavra": "amazing",
+                "coeficiente": 4.826273241557883
+            },
+            {
+                "palavra": "best",
+                "coeficiente": 4.678244081163652
+            },
+            {
+                "palavra": "wonderful",
+                "coeficiente": 4.637217387379001
+            },
+            {
+                "palavra": "loved",
+                "coeficiente": 4.412144478444256
+            },
+            {
+                "palavra": "hilarious",
+                "coeficiente": 4.329688399720421
+            },
+            {
+                "palavra": "favorite",
+                "coeficiente": 4.139607795030391
+            },
+            {
+                "palavra": "fun",
+                "coeficiente": 4.118063773335603
+            }
+        ],
+        "negativas": [
+            {
+                "palavra": "worst",
+                "coeficiente": -9.30693992841425
+            },
+            {
+                "palavra": "bad",
+                "coeficiente": -7.938421583156699
+            },
+            {
+                "palavra": "awful",
+                "coeficiente": -7.56365473142587
+            },
+            {
+                "palavra": "waste",
+                "coeficiente": -6.694036377658572
+            },
+            {
+                "palavra": "boring",
+                "coeficiente": -6.074102207086061
+            },
+            {
+                "palavra": "poor",
+                "coeficiente": -5.665355996027937
+            },
+            {
+                "palavra": "terrible",
+                "coeficiente": -5.532056838717838
+            },
+            {
+                "palavra": "nothing",
+                "coeficiente": -5.224292142399041
+            },
+            {
+                "palavra": "dull",
+                "coeficiente": -5.014150249980938
+            },
+            {
+                "palavra": "worse",
+                "coeficiente": -4.9894015550746245
+            }
+        ]
+    }
+}
