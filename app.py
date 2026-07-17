@@ -268,11 +268,13 @@ with tab2:
         pos_precisao = metricas['relatorio']['positivo']['precisao']
         pos_recall = metricas['relatorio']['positivo']['recall']
         pos_f1 = metricas['relatorio']['positivo']['f1']
+        f1_medio = (neg_f1 + pos_f1) / 2
         
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         col1.metric("🎯 Acurácia", f"{acuracia:.2%}")
         col2.metric("📊 Precisão Média", f"{(neg_precisao + pos_precisao)/2:.2%}", "✅")
         col3.metric("🔄 Recall Médio", f"{(neg_recall + pos_recall)/2:.2%}", "✅")
+        col4.metric("⚖️ F1-Score Médio", f"{f1_medio:.2%}", "✅")
         
         st.write("### 📊 Métricas por Classe")
         df_metricas = pd.DataFrame({
