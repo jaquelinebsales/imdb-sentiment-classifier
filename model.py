@@ -67,22 +67,11 @@ print(classification_report(y_test, y_pred))
 print("\nMatriz de Confusão:")
 print(confusion_matrix(y_test, y_pred))
 
-print("\n" + "="*50)
-print("🔍 PALAVRAS MAIS IMPORTANTES")
-print("="*50)
-
 coeficientes = modelo.coef_[0]
 palavras = vetorizador.get_feature_names_out()
 
 top_pos = sorted(zip(coeficientes, palavras), reverse=True)[:10]
-print("\n🔝 Palavras mais associadas a POSITIVO:")
-for i, (coef, palavra) in enumerate(top_pos, 1):
-    print(f"  {i:2d}. '{palavra}': {coef:.4f}")
-
 top_neg = sorted(zip(coeficientes, palavras))[:10]
-print("\n🔝 Palavras mais associadas a NEGATIVO:")
-for i, (coef, palavra) in enumerate(top_neg, 1):
-    print(f"  {i:2d}. '{palavra}': {coef:.4f}")
 
 metricas = {
     'acuracia': float(accuracy_score(y_test, y_pred)),

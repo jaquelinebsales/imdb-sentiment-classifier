@@ -22,8 +22,8 @@ def limpar_texto(texto):
 
 # --- 3. FUNÇÃO DE CLASSIFICAÇÃO COM THRESHOLD ---
 def classificar_com_threshold(texto, vetorizador, modelo, 
-                              threshold_inferior=0.40, 
-                              threshold_superior=0.60):
+                              threshold_inferior=0.50, 
+                              threshold_superior=0.50):
     """
     Classifica uma crítica com zona neutra (experiência média).
     
@@ -145,7 +145,7 @@ with st.sidebar:
         "Limiar Inferior (Negativo)", 
         min_value=0.1, 
         max_value=0.5, 
-        value=0.40, 
+        value=0.50, 
         step=0.05
     )
     
@@ -153,7 +153,7 @@ with st.sidebar:
         "Limiar Superior (Positivo)", 
         min_value=0.5, 
         max_value=0.9, 
-        value=0.60, 
+        value=0.50, 
         step=0.05
     )
 
@@ -209,7 +209,9 @@ with tab1:
             
             if resultado['classe'] == 'positive':
                 st.balloons()
-            
+
+            st.write("\n \n")
+
             st.write("### 📊 Distribuição de Probabilidades")
             
             prob_df = pd.DataFrame({
