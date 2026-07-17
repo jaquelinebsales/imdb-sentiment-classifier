@@ -378,5 +378,5 @@ with tab3:
 
 # --- RODAPÉ ---
 st.markdown("---")
-st.caption("🎓 Desenvolvido para o Trabalho Final de Probabilidade e Estatística - IFCE")
+st.caption("🎓 Desenvolvido para o Trabalho Final de Ciência de Dados - IFCE")
 st.caption("👥 Jaqueline Sales | Camila Azevedo | Isaac Cunha | Diego Inácio")
